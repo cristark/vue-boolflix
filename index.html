@@ -36,7 +36,7 @@
             <div class="cds-container container">
                 <!-- Disco ad esempio -->
                 <div v-for="film in filmList" class="cd">
-                    <!-- <img :src="disco.poster" :alt="disco.title"> -->
+                    <img :src="baseImgUrl + imgSize + film.poster_path" :alt="film.title">
                     <h2>{{film.title}}</h2>
                     <h3>{{film.original_title}}</h3>
                     <span class="author">{{film.original_language}}</span>

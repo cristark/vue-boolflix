@@ -6,6 +6,8 @@ let app = new Vue({
         filmList: [],
         personalKey: '142a6088c254c6ad0c04405021a72539',
         lang: 'it-IT',
+        baseImgUrl: 'https://image.tmdb.org/t/p/',
+        imgSize: 'w342'
     },
     methods: {
         findFilm() {
@@ -18,13 +20,17 @@ let app = new Vue({
                     }
                 })
                 .then(result => {
+                    if (this.filmList.length > 0) {
+                        this.filmList = [];
+                    }
+
                     result.data.results.forEach(element => {
                         this.filmList.push(element);
                     });
+
+                    this.filmScr = '';
                 })
                 .catch(error => console.log('ERRORI: ', error));
-
-                console.log(this.filmList);
         }
     }
 });
