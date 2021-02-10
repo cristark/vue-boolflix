@@ -40,6 +40,11 @@
                     <h2>{{film.title}}</h2>
                     <h3>{{film.original_title}}</h3>
                     <span class="author">{{film.original_language}}</span>
+                    <div class="vote">
+                        <div class="stars" :style="{width: (film.vote_average * 10) + '%'}">
+                            <i v-for="i in 5" class="fas fa-star"></i>
+                        </div>
+                    </div>
                     <span class="year">{{film.vote_average}}</span>
                 </div>
             </div>

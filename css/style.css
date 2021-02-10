@@ -92,3 +92,11 @@ select {
 .cd span.year {
   color: grey;
 }
+
+.stars {
+  background: #dc1a28;
+  background-clip: text;
+  -webkit-text-stroke: 0.5px #fff;
+  color: transparent;
+  display: flex;
+}
