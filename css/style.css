@@ -9,6 +9,7 @@ body {
   font-family: "Lato", sans-serif;
   background: #1e2d3b;
   min-height: 100vh;
+  transition: all 1s linear;
 }
 
 #app {

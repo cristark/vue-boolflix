@@ -27,10 +27,29 @@ let app = new Vue({
                     result.data.results.forEach(element => {
                         this.filmList.push(element);
                     });
-
-                    this.filmScr = '';
+                    console.log(this.filmList);
                 })
                 .catch(error => console.log('ERRORI: ', error));
+
+
+            axios
+                .get('https://api.themoviedb.org/3/search/tv', {
+                    params: {
+                        api_key: this.personalKey,
+                        language: this.lang,
+                        query: this.filmScr
+                    }
+                })
+                .then(result => {
+                    result.data.results.forEach(element => {
+                        this.filmList.push(element);
+                    });
+
+                    this.filmScr = '';
+                    console.log(this.filmList);
+                })
+                .catch(error => console.log('ERRORI: ', error));
+
         }
     }
 });

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Benvenuto su BoolFlix | Cerca la tua Serie TV o film preferito</title>
     <!-- Favicon -->
-
+    <link rel="shortcut icon" href="img/favicon.png" type="image/png">
     <!-- Link FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <!-- Link Google Font -->
@@ -22,7 +22,7 @@
     <!-- HEADER -->
     <header>
         <div class="container">
-            <img src="img/slack-imgs.png" alt="Netflix logo" />
+            <img src="img/boolflix_logo.png" alt="Netflix logo" />
         </div>
     </header>
 
@@ -37,7 +37,8 @@
                 <!-- Disco ad esempio -->
                 <div v-for="film in filmList" class="cd">
                     <img :src="baseImgUrl + imgSize + film.poster_path" :alt="film.title">
-                    <p>{{film.title}}</p>
+                    <p v-if="film.title">{{film.title}}</p>
+                    <p v-else>{{film.name}}</p>
                     <img class="flag" :src="'img/' + film.original_language + '.svg'" :alt="film.original_language">
                     <div class="vote">
                         <div class="stars" :style="{width: (film.vote_average * 10) + '%'}">
