@@ -37,15 +37,14 @@
                 <!-- Disco ad esempio -->
                 <div v-for="film in filmList" class="cd">
                     <img :src="baseImgUrl + imgSize + film.poster_path" :alt="film.title">
-                    <h2>{{film.title}}</h2>
-                    <h3>{{film.original_title}}</h3>
-                    <span class="author">{{film.original_language}}</span>
+                    <p>{{film.title}}</p>
+                    <img class="flag" :src="'img/' + film.original_language + '.svg'" :alt="film.original_language">
                     <div class="vote">
                         <div class="stars" :style="{width: (film.vote_average * 10) + '%'}">
                             <i v-for="i in 5" class="fas fa-star"></i>
                         </div>
+                        <span class="year">VOTO: {{film.vote_average}}</span>
                     </div>
-                    <span class="year">{{film.vote_average}}</span>
                 </div>
             </div>
         </section>
