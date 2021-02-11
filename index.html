@@ -45,19 +45,59 @@
             </nav>
 
             <!-- + JUMBOTRON + -->
-            <section class="jumbotron">
-            </section>
+            <section class="jumbotron"></section>
         </header>
-    
+
         <!-- | MAIN | -->
         <main>
-            <section>
+            <!-- + Lista film ordinati per popolarità senza query + -->
+            <section class="casual_list">
+
+                <!-- Scelta filtro lista -->
+                <div class="casual_title">
+                    <div v-for="element in casualListFilter" class="list_box">
+                        <i :class="element.icon"></i>
+                        <a href="#"> {{element.name}} </a>
+                    </div>
+                </div>
+                <hr>
+
+                <!-- Contenitore films -->
+                <div class="casual_container">
+                    <div v-for="film in trendsNow" class="list_box">
+                        <img :src="baseImgUrl + imgSize + film.poster_path" :alt="film.title">
+                        <h3>{{film.title}}</h3>
+                        <div class="list_details">
+                            <p>{{film.release_date.slice(0,4)}}</p>
+                            <i class="fas fa-heart"></i>
+                            <div class="stars_box">
+                                <div class="stars" :style="{width: (film.vote_average * 10) + '%'}">
+                                    <i v-for="i in 5" class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <p>{{film.vote_average}} </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+
+
+
+
+            
+<!--             <section>
     
-                <!-- Filtro categorie -->
+
                 <input type="text" @keyup.enter="findFilm" placeholder="Cerca film" v-model="filmScr">
     
                 <div class="cds-container container">
-                    <!-- Disco ad esempio -->
+
                     <div v-for="film in filmList" class="cd">
                         <img :src="baseImgUrl + imgSize + film.poster_path" :alt="film.title">
                         <p v-if="film.title">{{film.title}}</p>
@@ -71,7 +111,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
         </main>
     
         <!-- FOOTER -->

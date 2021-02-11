@@ -3,12 +3,45 @@ let app = new Vue({
     el: '#app',
     data: {
         navMenu: ['Home','Serie TV','Film','News','La mia lista',],
+        casualListFilter: [
+            {
+                name: 'Trends Now',
+                icon: 'fas fa-angle-double-up'
+            },
+            {
+                name: 'Popular',
+                icon: 'fas fa-fire-alt'
+            },
+            {
+                name: 'Premieres',
+                icon: 'fas fa-star'
+            },
+            {
+                name: 'Recently Added',
+                icon: 'fas fa-plus'
+            }
+        ],
         filmScr: '',
         filmList: [],
+        trendsNow: [],
         personalKey: '142a6088c254c6ad0c04405021a72539',
         lang: 'it-IT',
         baseImgUrl: 'https://image.tmdb.org/t/p/',
         imgSize: 'w342'
+    },
+    mounted() {
+        // + Chiamata lista film TREND NOW +
+        axios
+                .get('https://api.themoviedb.org/3/movie/top_rated', {
+                    params: {
+                        api_key: this.personalKey,
+                        language: this.lang
+                    }
+                })
+                .then(result => {
+                    this.trendsNow = result.data.results;
+                })
+                .catch(error => console.log('ERRORI TREND NOW: ', error));
     },
     methods: {
         findFilm() {
@@ -30,7 +63,7 @@ let app = new Vue({
                     });
                     console.log(this.filmList);
                 })
-                .catch(error => console.log('ERRORI: ', error));
+                .catch(error => console.log('ERRORI FILM: ', error));
 
 
             axios
@@ -49,7 +82,7 @@ let app = new Vue({
                     this.filmScr = '';
                     console.log(this.filmList);
                 })
-                .catch(error => console.log('ERRORI: ', error));
+                .catch(error => console.log('ERRORI SERIE TV: ', error));
 
         }
     }
