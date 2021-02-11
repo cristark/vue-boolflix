@@ -2,7 +2,7 @@
 let app = new Vue({
     el: '#app',
     data: {
-        navMenu: ['Home','Serie TV','Film','News','La mia lista',],
+        navMenu: ['Home','Film','Serie TV','News','La mia lista',],
         casualListFilter: [
             {
                 name: 'Trends Now',
@@ -21,6 +21,7 @@ let app = new Vue({
                 icon: 'fas fa-plus'
             }
         ],
+        textSearch: false,
         filmScr: '',
         filmList: [],
         trendsNow: [],
@@ -45,6 +46,7 @@ let app = new Vue({
     },
     methods: {
         findFilm() {
+            // + CHIAMATA FILM RICERCA UTENTE +
             axios
                 .get('https://api.themoviedb.org/3/search/movie', {
                     params: {
@@ -65,7 +67,7 @@ let app = new Vue({
                 })
                 .catch(error => console.log('ERRORI FILM: ', error));
 
-
+            // + CHIAMATA SERIE TV RICERCA UTENTE +
             axios
                 .get('https://api.themoviedb.org/3/search/tv', {
                     params: {

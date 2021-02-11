@@ -123,12 +123,13 @@ main {
   width: 100%;
 }
 
-.casual_list {
+.casual_list,
+.search_list {
   color: #4d4c51;
   font-weight: 600;
 }
 
-.casual_list hr {
+hr {
   background: #4d4c51;
   height: 3px;
   border-radius: 2px;
@@ -137,7 +138,7 @@ main {
   width: 83%;
 }
 
-.casual_list h3 {
+main h3 {
   text-align: left;
   color: #fff;
   font-size: 1em;
@@ -149,28 +150,42 @@ main {
   overflow: hidden;
 }
 
-.casual_list .casual_title {
-  font-size: 1.2em;
-  padding: 50px 150px;
+/* + Scelta filtro lista + */
+.box_title {
+  font-size: 1.5em;
+  padding: 50px;
   color: #fff;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   cursor: pointer;
 }
 
-.casual_title i {
+.box_title i {
   margin-right: 20px;
 }
 
-.casual_list .casual_container {
-  margin: 30px 0;
+.box_title input {
+  height: 30px;
+  font-family: "Montserrat";
+  font-weight: 600;
+  color: #fff;
+  background: none;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  padding: 10px;
+  outline: none;
+}
+
+/* + Contenitore films + */
+.casual_list .list_container {
+  margin: 30px 0 40px;
   display: flex;
   justify-content: center;
   overflow: hidden;
 }
 
-.casual_container .list_box {
+.list_container .list_box {
   width: calc(100% / 6);
   padding: 20px;
   margin-right: 10px;
@@ -201,68 +216,24 @@ main {
   display: flex;
 }
 
-/* !Da qui in giù -> MODIFICARE! */
-select {
-  text-align: center;
-  margin-top: 10px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  text-transform: uppercase;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #fff;
-  background: #2e3a46;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  cursor: pointer;
+/* + Area ricerca Film / Serie + */
+.search_list {
+  padding: 0 100px;
 }
 
-.cds-container {
+.search_list hr {
+  width: 95%;
+}
+/* + Contenitore Films + */
+.search_list .list_container {
+  margin: 30px 0 40px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
-  padding: 20px 0 50px;
+  justify-content: center;
 }
 
-.cd {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  flex-basis: calc(100% / 5 - 40px);
-  padding: 20px;
-  margin: 10px 20px;
-  border-radius: 5px;
-  height: 360px;
-  background: rgb(46, 58, 70);
-  color: #fff;
+.search_list .list_container .list_box {
+  width: calc(100% / 5 - 10px);
+  padding: 20px 40px;
   text-align: center;
-  cursor: pointer;
-}
-
-.cd img {
-  max-width: 100%;
-}
-
-.cd .flag {
-  max-width: 35px;
-  margin: 10px 0;
-}
-
-.cd h3 {
-  margin: 20px 0;
-  color: white;
-  font-size: 22px;
-  text-transform: uppercase;
-}
-
-.cd span.author {
-  color: grey;
-  font-size: 20px;
-}
-
-.cd span.year {
-  color: grey;
 }

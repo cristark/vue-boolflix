@@ -50,12 +50,13 @@
 
         <!-- | MAIN | -->
         <main>
+
             <!-- + Lista film ordinati per popolarità senza query + -->
             <section class="casual_list">
 
                 <!-- Scelta filtro lista -->
-                <div class="casual_title">
-                    <div v-for="element in casualListFilter" class="list_box">
+                <div class="box_title">
+                    <div v-for="element in casualListFilter" class="title">
                         <i :class="element.icon"></i>
                         <a href="#"> {{element.name}} </a>
                     </div>
@@ -63,7 +64,7 @@
                 <hr>
 
                 <!-- Contenitore films -->
-                <div class="casual_container">
+                <div class="list_container">
                     <div v-for="film in trendsNow" class="list_box">
                         <img :src="baseImgUrl + imgSize + film.poster_path" :alt="film.title">
                         <h3>{{film.title}}</h3>
@@ -81,37 +82,46 @@
                 </div>
             </section>
 
+            <!-- + Area ricerca Film / Serie + -->
+            <section class="search_list">
 
+                <!-- Scelta filtro lista -->
+                <div class="box_title">
+                    <div class="title">
+                        <i class="fas fa-film"></i>
+                        <a href="#">Film</a>
+                    </div>
+                    <div class="title">
+                        <i class="fab fa-youtube"></i>
+                        <a href="#">Serie TV</a>
+                    </div>
+                    <div class="title">
+                        <i @click="textSearch = !textSearch" class="fas fa-search"></i>
+                        <input type="text" v-if="textSearch" v-model="filmScr" @keyup.enter="findFilm">
+                        <a v-else href="#">Ricerca</a>
+                    </div>
+                </div>
+                <hr>
 
-
-
-
-
-
-
-
-            
-<!--             <section>
-    
-
-                <input type="text" @keyup.enter="findFilm" placeholder="Cerca film" v-model="filmScr">
-    
-                <div class="cds-container container">
-
-                    <div v-for="film in filmList" class="cd">
-                        <img :src="baseImgUrl + imgSize + film.poster_path" :alt="film.title">
-                        <p v-if="film.title">{{film.title}}</p>
-                        <p v-else>{{film.name}}</p>
-                        <img class="flag" :src="'img/' + film.original_language + '.svg'" :alt="film.original_language">
-                        <div class="vote">
-                            <div class="stars" :style="{width: (film.vote_average * 10) + '%'}">
-                                <i v-for="i in 5" class="fas fa-star"></i>
+                <!-- Contenitore films -->
+                <div class="list_container">
+                    <div v-for="film in filmList" class="list_box">
+                        <img v-if="film.poster_path == null" src="img/null.png" alt="">
+                        <img v-else :src="baseImgUrl + imgSize + film.poster_path" :alt="film.title">
+                        <h3>{{film.title}}</h3>
+                        <div class="list_details">
+                            <p>{{film.release_date.slice(0,4)}}</p>
+                            <i class="fas fa-heart"></i>
+                            <div class="stars_box">
+                                <div class="stars" :style="{width: (film.vote_average * 10) + '%'}">
+                                    <i v-for="i in 5" class="fas fa-star"></i>
+                                </div>
                             </div>
-                            <span class="year">VOTO: {{film.vote_average}}</span>
+                            <p>{{film.vote_average}} </p>
                         </div>
                     </div>
                 </div>
-            </section> -->
+            </section>
         </main>
     
         <!-- FOOTER -->
