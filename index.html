@@ -9,7 +9,8 @@
     <!-- Link FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <!-- Link Google Font -->
-
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;800;900&display=swap" rel="stylesheet">
     <!-- Link Vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <!-- Link AXIOS/AJAX -->
@@ -18,43 +19,66 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="main_container" id="app">
+
+        <!-- | HEADER | -->
+        <header>
+
+            <!-- + MENU NAVIGAZIONE FIXED + -->
+            <nav>
+                <!-- Logo Header -->
+                <div class="header_logo b_flex">
+                    <img src="img/boolflix_logo.png" alt="Netflix logo"/>
+                </div>
+                <!-- Main menu -->
+                <div class="main_nav">
+                    <ul>
+                        <li v-for="element in navMenu"><a href="#"> {{element}} </a></li>
+                    </ul>
+                </div>
+                <!-- Icone ricerca e utente -->
+                <div class="user_nav b_flex">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-bell"></i>
+                    <div class="user_icon"></div>
+                </div>
+            </nav>
+
+            <!-- + JUMBOTRON + -->
+            <section class="jumbotron">
+            </section>
+        </header>
     
-    <!-- HEADER -->
-    <header>
-        <div class="container">
-            <img src="img/boolflix_logo.png" alt="Netflix logo" />
-        </div>
-    </header>
-
-    <!-- MAIN -->
-    <main>
-        <section id="app">
-
-            <!-- Filtro categorie -->
-            <input type="text" @keyup.enter="findFilm" placeholder="Cerca film" v-model="filmScr">
-
-            <div class="cds-container container">
-                <!-- Disco ad esempio -->
-                <div v-for="film in filmList" class="cd">
-                    <img :src="baseImgUrl + imgSize + film.poster_path" :alt="film.title">
-                    <p v-if="film.title">{{film.title}}</p>
-                    <p v-else>{{film.name}}</p>
-                    <img class="flag" :src="'img/' + film.original_language + '.svg'" :alt="film.original_language">
-                    <div class="vote">
-                        <div class="stars" :style="{width: (film.vote_average * 10) + '%'}">
-                            <i v-for="i in 5" class="fas fa-star"></i>
+        <!-- | MAIN | -->
+        <main>
+            <section>
+    
+                <!-- Filtro categorie -->
+                <input type="text" @keyup.enter="findFilm" placeholder="Cerca film" v-model="filmScr">
+    
+                <div class="cds-container container">
+                    <!-- Disco ad esempio -->
+                    <div v-for="film in filmList" class="cd">
+                        <img :src="baseImgUrl + imgSize + film.poster_path" :alt="film.title">
+                        <p v-if="film.title">{{film.title}}</p>
+                        <p v-else>{{film.name}}</p>
+                        <img class="flag" :src="'img/' + film.original_language + '.svg'" :alt="film.original_language">
+                        <div class="vote">
+                            <div class="stars" :style="{width: (film.vote_average * 10) + '%'}">
+                                <i v-for="i in 5" class="fas fa-star"></i>
+                            </div>
+                            <span class="year">VOTO: {{film.vote_average}}</span>
                         </div>
-                        <span class="year">VOTO: {{film.vote_average}}</span>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-        
-    </footer>
+            </section>
+        </main>
+    
+        <!-- FOOTER -->
+        <footer>
+            
+        </footer>
+    </div>
 
     <!-- Link Script Javascript -->
     <script src="js/script.js" charset="utf-8"></script>

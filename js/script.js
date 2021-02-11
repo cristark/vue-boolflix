@@ -2,6 +2,7 @@
 let app = new Vue({
     el: '#app',
     data: {
+        navMenu: ['Home','Serie TV','Film','News','La mia lista',],
         filmScr: '',
         filmList: [],
         personalKey: '142a6088c254c6ad0c04405021a72539',
