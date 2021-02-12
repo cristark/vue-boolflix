@@ -105,19 +105,31 @@
 
                 <!-- Contenitore films -->
                 <div class="list_container">
-                    <div v-for="film in filmList" class="list_box">
-                        <img v-if="film.poster_path == null" src="img/null.png" alt="">
-                        <img v-else :src="baseImgUrl + imgSize + film.poster_path" :alt="film.title">
-                        <h3>{{film.title}}</h3>
-                        <div class="list_details">
-                            <p>{{film.release_date.slice(0,4)}}</p>
-                            <i class="fas fa-heart"></i>
-                            <div class="stars_box">
-                                <div class="stars" :style="{width: (film.vote_average * 10) + '%'}">
-                                    <i v-for="i in 5" class="fas fa-star"></i>
+                    <div v-for="(film, index) in filmList" class="list_box">
+                        <div class="box">
+                            <div class="img_box">
+                                <img v-if="film.poster_path == null" src="img/null.png" alt="Immagine non disponibile">
+                                <img v-else @mouseover="detailsIndex = index" :src="baseImgUrl + imgSize + film.poster_path" :alt="film.title">
+                                <div v-if="detailsIndex == index" class="details_box">
+                                    <img :src="'img/' + film.original_language + '.svg'" :alt="film.original_language">
+                                    <h4 class="txt_left">Descrizione</h4>
+                                    <h5 v-if="film.overview == ''" class="txt_left">Momentaneamente non disponibile</h5>
+                                    <h5 v-else class="txt_left">{{film.overview}}</h5>
                                 </div>
                             </div>
-                            <p>{{film.vote_average}} </p>
+                            <h3 v-if="film.name == undefined">{{film.title}}</h3>
+                            <h3 v-else>{{film.name}}</h3>
+                            <div class="list_details">
+                                <p v-if="film.first_air_date == undefined">{{film.release_date.slice(0,4)}}</p>
+                                <p v-else>{{film.first_air_date.slice(0,4)}}</p>
+                                <i class="fas fa-heart"></i>
+                                <div class="stars_box">
+                                    <div class="stars" :style="{width: (film.vote_average * 10) + '%'}">
+                                        <i v-for="i in 5" class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <p>{{film.vote_average}} </p>
+                            </div>
                         </div>
                     </div>
                 </div>

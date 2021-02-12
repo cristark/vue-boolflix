@@ -37,6 +37,10 @@ a {
   align-items: center;
 }
 
+.txt_left {
+  text-align: left;
+}
+
 /* | HEADER | */
 header {
   width: 100%;
@@ -236,4 +240,42 @@ main h3 {
   width: calc(100% / 5 - 10px);
   padding: 20px 40px;
   text-align: center;
+  position: relative;
+}
+
+.list_container .list_box .img_box {
+  position: relative;
+  transition: all 0.5s linear;
+}
+
+.list_container .list_box .img_box .details_box {
+  width: 91%;
+  height: 94%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(5%);
+  color: #fff;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.img_box .details_box img {
+  height: 20px;
+}
+
+.img_box .details_box h4 {
+  font-size: 0.7em;
+  color: #ffb500;
+}
+
+.img_box .details_box h5 {
+  font-size: 0.6em;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  overflow: hidden;
 }

@@ -21,14 +21,16 @@ let app = new Vue({
                 icon: 'fas fa-plus'
             }
         ],
+        trendsNow: [],
         textSearch: false,
         filmScr: '',
         filmList: [],
-        trendsNow: [],
+        detailsIndex: null,
         personalKey: '142a6088c254c6ad0c04405021a72539',
         lang: 'it-IT',
         baseImgUrl: 'https://image.tmdb.org/t/p/',
-        imgSize: 'w342'
+        imgSize: 'w342',
+        imgSizeBig: 'original',
     },
     mounted() {
         // + Chiamata lista film TREND NOW +
@@ -63,7 +65,7 @@ let app = new Vue({
                     result.data.results.forEach(element => {
                         this.filmList.push(element);
                     });
-                    console.log(this.filmList);
+                    console.log('FILM LISTA: ', this.filmList);
                 })
                 .catch(error => console.log('ERRORI FILM: ', error));
 
@@ -86,6 +88,9 @@ let app = new Vue({
                 })
                 .catch(error => console.log('ERRORI SERIE TV: ', error));
 
+        },
+        showDetails(indice) {
+            this.detailsIndex = indice;
         }
     }
 });
