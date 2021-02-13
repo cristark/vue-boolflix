@@ -56,7 +56,7 @@
 
                 <!-- Scelta filtro lista -->
                 <div class="box_title">
-                    <div v-for="element in casualListFilter" class="title">
+                    <div v-for="(element, index) in casualListFilter" class="title" :class="(casualListFilterCounter == index)?'active':''" @click="casualListFilterCounter = index">
                         <i :class="element.icon"></i>
                         <span> {{element.name}} </span>
                     </div>
@@ -87,14 +87,14 @@
 
                 <!-- Scelta filtro lista -->
                 <div class="box_title">
-                    <div v-for="(element, index) in contentList" class="title">
+                    <div v-for="(element, index) in contentList" class="title" :class="(contentListCounter == index)?'active':''" @click="contentListCounter = index">
                         <i :class="element.icon"></i>
                         <span> {{element.name}} </span>
                     </div>
-                    <div class="title">
+                    <div class="src_title">
                         <i @click="textSearch = !textSearch" class="fas fa-search"></i>
-                        <input type="text" v-if="textSearch" v-model="filmScr" @keyup.enter="findFilm" :placeholder="'Cerca in ' + contentList[contentListCounter].name">
-                        <a v-else href="#">Ricerca</a>
+                        <input type="text" v-if="textSearch" v-model="filmScr" @keyup.enter="(contentListCounter == 0)?findFilm():findTV()" :placeholder="'Cerca in ' + contentList[contentListCounter].name">
+                        <span v-else>Ricerca</span>
                     </div>
                 </div>
                 <hr>

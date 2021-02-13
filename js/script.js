@@ -59,9 +59,8 @@ let app = new Vue({
                 .catch(error => console.log('ERRORI TREND NOW: ', error));
     },
     methods: {
-        findFilm() {
+        findFilm() { // + CHIAMATA FILM RICERCA UTENTE +
             /* this.getContent('movie', this.filmList); */
-            // + CHIAMATA FILM RICERCA UTENTE +
             axios
                 .get(`https://api.themoviedb.org/3/search/movie`, {
                     params: {
@@ -77,6 +76,27 @@ let app = new Vue({
                     this.filmList.forEach(element => {
                         element.cast = '';
                         this.getCast('movie', element);
+                    });
+                    console.log('LISTA FILM con CAST: ',this.filmList);
+                })
+                .catch(error => console.log('ERRORI FILM: ', error));
+        },
+        findTV() { // + CHIAMATA SERIE TV RICERCA UTENTE +
+            axios
+                .get(`https://api.themoviedb.org/3/search/tv`, {
+                    params: {
+                        api_key: this.personalKey,
+                        language: this.lang,
+                        query: this.filmScr
+                    }
+                })
+                .then(result => {
+                    this.filmList = result.data.results;
+                    console.log('LISTA FILM: ', this.filmList);
+
+                    this.filmList.forEach(element => {
+                        element.cast = '';
+                        this.getCast('tv', element);
                     });
                     console.log('LISTA FILM con CAST: ',this.filmList);
                 })

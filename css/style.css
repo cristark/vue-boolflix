@@ -162,7 +162,24 @@ main h3 {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.box_title .title {
+  position: relative;
   cursor: pointer;
+}
+
+.box_title .title.active::after {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #dc1a28;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .box_title i {
