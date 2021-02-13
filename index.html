@@ -38,7 +38,7 @@
                 </div>
                 <!-- Icone ricerca e utente -->
                 <div class="user_nav b_flex">
-                    <i class="fas fa-search"></i>
+                    <i class="fas fa-search" @click="scrollToSrc"></i>
                     <i class="fas fa-bell"></i>
                     <div class="user_icon"></div>
                 </div>
@@ -114,6 +114,10 @@
                                 <div v-if="detailsIndex == index" class="details_box">
                                     <!-- Bandiera lingua film -->
                                     <img :src="'img/' + film.original_language + '.svg'" :alt="film.original_language">
+                                    <!-- Titolo originale -->
+                                    <h4 class="txt_left">Titolo originale</h4>
+                                    <h5 v-if="film.original_title == null" class="txt_left">{{film.original_name}}</h5>
+                                    <h5 v-else class="txt_left">{{film.original_title}}</h5>
                                     <!-- Overview -->
                                     <h4 class="txt_left">Descrizione</h4>
                                     <h5 v-if="film.overview == ''" class="txt_left">Momentaneamente non disponibile</h5>

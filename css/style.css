@@ -71,17 +71,6 @@ header nav .main_nav {
   position: relative;
 }
 
-header nav .main_nav::after {
-  content: "";
-  display: inline-block;
-  width: 100%;
-  height: 2px;
-  background-color: #fff;
-  border-radius: 2px;
-  position: absolute;
-  bottom: 40px;
-}
-
 header nav .main_nav li {
   font-size: 1.2em;
   font-weight: 400;
