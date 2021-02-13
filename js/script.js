@@ -3,6 +3,7 @@ let app = new Vue({
     el: '#app',
     data: {
         navMenu: ['Home','Film','Serie TV','News','La mia lista',],
+        casualListFilterCounter: 0,
         casualListFilter: [
             {
                 name: 'Trends Now',
@@ -19,6 +20,17 @@ let app = new Vue({
             {
                 name: 'Recently Added',
                 icon: 'fas fa-plus'
+            }
+        ],
+        contentListCounter: 0,
+        contentList: [
+            {
+                name: 'Film',
+                icon: 'fas fa-film'
+            },
+            {
+                name: 'Serie TV',
+                icon: 'fab fa-youtube'
             }
         ],
         trendsNow: [],
@@ -48,9 +60,10 @@ let app = new Vue({
     },
     methods: {
         findFilm() {
+            /* this.getContent('movie', this.filmList); */
             // + CHIAMATA FILM RICERCA UTENTE +
             axios
-                .get('https://api.themoviedb.org/3/search/movie', {
+                .get(`https://api.themoviedb.org/3/search/movie`, {
                     params: {
                         api_key: this.personalKey,
                         language: this.lang,
@@ -58,39 +71,63 @@ let app = new Vue({
                     }
                 })
                 .then(result => {
-                    if (this.filmList.length > 0) {
-                        this.filmList = [];
-                    }
+                    this.filmList = result.data.results;
+                    console.log('LISTA FILM: ', this.filmList);
 
-                    result.data.results.forEach(element => {
-                        this.filmList.push(element);
+                    this.filmList.forEach(element => {
+                        element.cast = '';
+                        this.getCast('movie', element);
                     });
-                    console.log('FILM LISTA: ', this.filmList);
+                    console.log('LISTA FILM con CAST: ',this.filmList);
                 })
                 .catch(error => console.log('ERRORI FILM: ', error));
-
-            // + CHIAMATA SERIE TV RICERCA UTENTE +
-            axios
-                .get('https://api.themoviedb.org/3/search/tv', {
-                    params: {
-                        api_key: this.personalKey,
-                        language: this.lang,
-                        query: this.filmScr
-                    }
-                })
-                .then(result => {
-                    result.data.results.forEach(element => {
-                        this.filmList.push(element);
-                    });
-
-                    this.filmScr = '';
-                    console.log(this.filmList);
-                })
-                .catch(error => console.log('ERRORI SERIE TV: ', error));
-
         },
         showDetails(indice) {
             this.detailsIndex = indice;
+        },
+        //! richiamato in un'altra funzione non stampa i risultati su HTML !
+        /* getContent(cat, arr) {
+            // + CHIAMATA FILM RICERCA UTENTE +
+            axios
+                .get(`https://api.themoviedb.org/3/search/${cat}`, {
+                    params: {
+                        api_key: this.personalKey,
+                        language: this.lang,
+                        query: this.filmScr
+                    }
+                })
+                .then(result => {
+                    arr = result.data.results;
+                    console.log('LISTA FILM: ', arr);
+
+                    arr.forEach(element => {
+                        element.cast = '';
+                        this.getCast(cat, element);
+                    });
+                    console.log('LISTA FILM con CAST: ',arr);
+                })
+                .catch(error => console.log('ERRORI FILM: ', error));
+        }, */
+        getCast(cat, elementoArr) { //|Funzione chiamata CAST
+            // + CHIAMATA AXIOS ATTORI +
+            axios
+                .get(`https://api.themoviedb.org/3/${cat}/${elementoArr.id}/credits`, {
+                    params: {
+                        api_key: this.personalKey,
+                        language: this.lang
+                    }
+                })
+                .then(result => {
+                    for (let i = 0; i < 5; i++) {
+                        if (result.data.cast.length == 0) {
+                            result.data.cast[i].name = 'Cast momentaneamente non disponibile'
+                        } else {
+                            elementoArr.cast += result.data.cast[i].name + ', ';
+                        }
+                    }
+                    this.filmScr = '';
+                })
+                .catch(error => console.log('ERRORI ATTORI: ', error));
         }
     }
 });
