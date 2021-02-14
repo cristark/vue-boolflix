@@ -56,7 +56,7 @@
 
                 <!-- Scelta filtro lista -->
                 <div class="box_title">
-                    <div v-for="(element, index) in casualListFilter" class="title" :class="(casualListFilterCounter == index)?'active':''" @click="casualListFilterCounter = index">
+                    <div v-for="(element, index) in casualListFilter" class="title" :class="(casualListFilterCounter == index)?'active':''" @click="casualListFilterCounter = index; getBestList(element.api)">
                         <i :class="element.icon"></i>
                         <span> {{element.name}} </span>
                     </div>

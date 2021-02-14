@@ -6,19 +6,23 @@ let app = new Vue({
         casualListFilterCounter: 0,
         casualListFilter: [
             {
-                name: 'Trends Now',
+                name: 'Top Rated',
+                api: 'top_rated',
                 icon: 'fas fa-angle-double-up'
             },
             {
                 name: 'Popular',
+                api: 'popular',
                 icon: 'fas fa-fire-alt'
             },
             {
-                name: 'Premieres',
+                name: 'Now Playing',
+                api: 'now_playing',
                 icon: 'fas fa-star'
             },
             {
-                name: 'Recently Added',
+                name: 'Upcoming',
+                api: 'upcoming',
                 icon: 'fas fa-plus'
             }
         ],
@@ -46,17 +50,7 @@ let app = new Vue({
     },
     mounted() {
         // + Chiamata lista film TREND NOW +
-        axios
-                .get('https://api.themoviedb.org/3/movie/top_rated', {
-                    params: {
-                        api_key: this.personalKey,
-                        language: this.lang
-                    }
-                })
-                .then(result => {
-                    this.trendsNow = result.data.results;
-                })
-                .catch(error => console.log('ERRORI TREND NOW: ', error));
+        this.getBestList(this.casualListFilter[this.casualListFilterCounter].api);
     },
     methods: {
         findFilm() { // + CHIAMATA FILM RICERCA UTENTE +
@@ -147,6 +141,20 @@ let app = new Vue({
                 this.filmScr = '';
             })
             .catch(error => console.log('ERRORI ATTORI: ', error));
+        },
+        getBestList(cat) {
+            axios
+                .get(`https://api.themoviedb.org/3/movie/${cat}`, {
+                    params: {
+                        api_key: this.personalKey,
+                        language: this.lang
+                    }
+                })
+                .then(result => {
+                    this.trendsNow = result.data.results;
+                    console.log(this.trendsNow);
+                })
+                .catch(error => console.log('ERRORI TREND NOW: ', error));
         },
         showDetails(indice) {
             this.detailsIndex = indice;
